@@ -1,10 +1,13 @@
 import express from 'express';
-import { loginUser } from '../controllers/user.controller.js';
+import { loginUser,addUser } from '../controllers/user.controller.js';
 import { verifyToken } from '../utils/verifyUser.js';
 
 const router = express.Router();
 
 // Login route
-router.post('/login', verifyToken, loginUser);
+router.post('/login', loginUser);
+
+// Add user route
+router.post('/add-user', verifyToken, addUser);
 
 export default router;

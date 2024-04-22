@@ -14,13 +14,22 @@ export const loginUser = async (req, res, next) => {
       return next(errorHandler(404, 'User not found'));
     }
 
-    // Check if password is correct (you should use bcrypt for password hashing)
+    // Check if password is correct
     if (user.auth_info.password !== password) {
       return next(errorHandler(401, 'Invalid credentials'));
     }
 
-    // Generate JWT token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    // Create a user object without the password
+    const userWithoutPassword = {
+      id: user._id,
+      basic_info: user.basic_info,
+      contact_info: user.contact_info,
+      type: user.type,
+      status: user.status
+    };
+
+    // Generate JWT token with user data
+    const token = jwt.sign({ user: userWithoutPassword }, process.env.JWT_SECRET, {
       expiresIn: '1h' // Token expires in 1 hour
     });
 
@@ -30,8 +39,44 @@ export const loginUser = async (req, res, next) => {
       secure: process.env.NODE_ENV === 'production'
     });
 
-    // Send response
-    res.status(200).json({ success: true, message: 'Login successful', token });
+    // Send response with user data and token
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      user: userWithoutPassword,
+      token
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+export const addUser = async (req, res, next) => {
+  const { email, type, basic_info, contact_info } = req.body;
+
+  try {
+    // Verify that the user is an admin
+    if (req.user.user.type !== 'ADMIN') {
+      return next(errorHandler(401, 'Only admins can add users'));
+    }
+
+    // Create a new user with the provided data
+    const newUser = new User({
+      type,
+      status: 'ONBOARD',
+      basic_info,
+      contact_info,
+      auth_info: {
+        password: ''
+      }
+    });
+
+    // Save the new user to the database
+    await newUser.save();
+
+    // Send a success response
+    res.status(201).json({ success: true, message: 'User added successfully' });
   } catch (err) {
     next(err);
   }
