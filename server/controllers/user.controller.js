@@ -56,10 +56,7 @@ export const addUser = async (req, res, next) => {
   const { email, type, basic_info, contact_info } = req.body;
 
   try {
-    // Verify that the user is an admin
-    if (req.user.user.type !== 'ADMIN') {
-      return next(errorHandler(401, 'Only admins can add users'));
-    }
+
 
     // Create a new user with the provided data
     const newUser = new User({
