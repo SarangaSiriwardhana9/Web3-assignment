@@ -80,6 +80,25 @@ export const addUser = async (req, res, next) => {
   }
 };
 
+//get all users
+
+export const getAllUsers = async (req, res, next) => {
+  try {
+    // Find all users except the logged-in user
+    const users = await User.find({ _id: { $ne: req.user.id } });
+
+    // Send response with users data
+    res.status(200).json({
+      success: true,
+      message: 'Users retrieved successfully',
+      users
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+
 //logout user
 export const logout = (req, res) => {
   res.clearCookie('access_token').status(200).json('Signout success!');
