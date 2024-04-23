@@ -4,17 +4,18 @@ const userSchema = new mongoose.Schema({
     type: {
         type: String,
         enum: ['ADMIN', 'USER'],
-        required: true
+        
       },
       status: {
         type: String,
         enum: ['ACTIVE', 'ONBOARD', 'INACTIVE'],
-        required: true
+       
       },
       basic_info: {
         first_name: {
           type: String,
           required: true
+         
         },
         last_name: {
           type: String,
