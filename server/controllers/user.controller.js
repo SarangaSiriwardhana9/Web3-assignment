@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
 import { errorHandler } from '../utils/error.js';
 
+//user login
 export const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -51,7 +52,7 @@ export const loginUser = async (req, res, next) => {
   }
 };
 
-
+//add user
 export const addUser = async (req, res, next) => {
   const { email, type, basic_info, contact_info } = req.body;
 
@@ -77,4 +78,9 @@ export const addUser = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+//logout user
+export const logout = (req, res) => {
+  res.clearCookie('access_token').status(200).json('Signout success!');
 };
