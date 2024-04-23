@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import Logout from "../components/Logout";
+import Header from "../components/Header";
 
 export default function Home() {
     const { currentUser } = useSelector((state) => state.user);
     console.log(currentUser);
     return (
-        <div>
+        <div className="">
+            <Header />
             <h1>Home</h1>
             {/* display loged in user details */}
             {currentUser && (

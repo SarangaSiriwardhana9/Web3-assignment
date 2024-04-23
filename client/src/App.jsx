@@ -12,13 +12,15 @@ export default function App() {
     <BrowserRouter>
 
       <Routes>
+        
+       
         <Route path='/login' element={<Login />} />
 
         <Route element={<PrivateRoute />}>
-          <Route path='/' element={<Home />} />
-        </Route>
+        <Route path='/' element={<Home />} />
+          </Route>
 
-
+        
       </Routes>
     </BrowserRouter>
 
