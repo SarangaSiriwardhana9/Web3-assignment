@@ -4,10 +4,6 @@
 
 This project is a basic full-stack system built as part of the WEB3 Assignment. It includes a login page, User management feature, and a REST API for carrying out the business logic.
 
-![1](https://github.com/SarangaSiriwardhana9/Web3-assignment/assets/99233703/a5dc8294-851a-4f5c-ae99-2dfa79f46b02)
-![4](https://github.com/SarangaSiriwardhana9/Web3-assignment/assets/99233703/2b7b61c5-c45c-4c24-ab59-c13d8559181d)
-![3](https://github.com/SarangaSiriwardhana9/Web3-assignment/assets/99233703/8da54c11-a698-4056-a19b-7e237ecce492)
-![2](https://github.com/SarangaSiriwardhana9/Web3-assignment/assets/99233703/134d51ce-ff89-46c9-b36a-1b0b231a0d8d)
 
 <!-- Images in a table with two columns -->
 <table>
