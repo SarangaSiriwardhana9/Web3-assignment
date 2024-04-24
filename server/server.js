@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/user.routes.js';
 
+
 dotenv.config();
 
 // Connect to MongoDB

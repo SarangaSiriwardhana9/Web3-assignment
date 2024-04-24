@@ -20,10 +20,10 @@ export default function Header() {
                     <Link to="/" className="text-white sm:text-sm md:text-lg font-thin mr-4">User Onboarding</Link>
                     <Link to="/user-list" className="text-white sm:text-sm md:text-lg font-thin mr-4">Users List</Link>
                 </div>
-                <div className="px-10 hidden md:block"> 
-                    <div className="relative">
-                        <FaSearch className="absolute left-3 top-3 text-gray-400" />
-                        <input type="text" className="bg-white rounded-sm py-2 px-12 pl-10" placeholder="Search" />
+                <div className="px-10 hidden  md:block"> 
+                    <div className="relative ">
+                        <FaSearch className="absolute left-3 top-3    text-gray-400" />
+                        <input type="text" className="bg-white focus:outline-none rounded-sm py-2 px-12 pl-10" placeholder="Search" />
                     </div>
                 </div>
 

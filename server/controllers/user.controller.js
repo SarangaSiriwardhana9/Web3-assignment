@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
 import { errorHandler } from '../utils/error.js';
+import bcrypt from 'bcryptjs';
 
 //user login
 export const loginUser = async (req, res, next) => {
@@ -16,7 +17,8 @@ export const loginUser = async (req, res, next) => {
     }
 
     // Check if password is correct
-    if (user.auth_info.password !== password) {
+    const isPasswordValid = await bcrypt.compare(password, user.auth_info.password);
+    if (!isPasswordValid) {
       return next(errorHandler(401, 'Invalid credentials'));
     }
 
