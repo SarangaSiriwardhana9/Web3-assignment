@@ -1,4 +1,5 @@
-import  { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import Header from '../components/Header';
 import ConfirmSaveUser from '../components/ConfirmSaveUser';
 
@@ -18,6 +19,7 @@ export default function UserOnboarding() {
 
     const [formData, setFormData] = useState(initialFormData);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,16 +51,16 @@ export default function UserOnboarding() {
                 body: JSON.stringify(formData),
             });
 
-            console.log(formData);
-
             const data = await res.json();
-            console.log(data);
-            alert("user added successfully")
-            /* clear form data after submit */
-            setFormData(initialFormData);
+            if (data.success) {
+                alert("User added successfully");
+                setFormData(initialFormData);
+            } else {
+                alert("email already exists")
+            }
         } catch (error) {
             console.error(error);
-            alert("user added failed")
+            alert("Failed to add user");
         }
         setShowConfirm(false);
     };
@@ -66,7 +68,6 @@ export default function UserOnboarding() {
     const handleCancelSave = () => {
         setShowConfirm(false);
     };
-
 
     return (
         <div className='bg-slate-100'>

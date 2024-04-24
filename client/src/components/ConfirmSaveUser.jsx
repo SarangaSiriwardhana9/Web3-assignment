@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { SlQuestion } from "react-icons/sl";
 
 export default function ConfirmSaveUser({ onConfirm, onCancel }) {
