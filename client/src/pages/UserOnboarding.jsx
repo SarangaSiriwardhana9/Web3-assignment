@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import Header from '../components/Header';
+import ConfirmSaveUser from '../components/ConfirmSaveUser';
 
 export default function UserOnboarding() {
     const [formData, setFormData] = useState({
@@ -15,6 +15,7 @@ export default function UserOnboarding() {
             mobile_number: ''
         }
     });
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,6 +30,10 @@ export default function UserOnboarding() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setShowConfirm(true);
+    };
+
+    const handleConfirmSave = async () => {
         try {
             const res = await fetch("/api/users/add-user", {
                 method: "POST",
@@ -42,11 +47,16 @@ export default function UserOnboarding() {
 
             const data = await res.json();
             console.log(data);
-            alert ("user added successfully")
+            alert("user added successfully")
         } catch (error) {
             console.error(error);
-            alert ("user aded failed")
+            alert("user added failed")
         }
+        setShowConfirm(false);
+    };
+
+    const handleCancelSave = () => {
+        setShowConfirm(false);
     };
 
     return (
@@ -54,13 +64,13 @@ export default function UserOnboarding() {
             <Header />
             <div className=''>
                 {/* form component */}
-                <div className='mt-6 bg-white mb-4 rounded-md shadow-2xl m-4 mx-2 md:mx-8'>
+                <div className='mt-6 bg-white h-screen mb-4 rounded-md shadow-2xl m-4 mx-2 md:mx-8'>
                     {/* Title component */}
                     <div className='flex flex-col mt-8 ml-4 md:ml-16 '>
                         <h1 className='text-3xl mt-6 font-medium text-gray-800'>User Onboarding</h1>
                         <span className='text-gray-400 text-lg mt-2'>Lorem ipsum dolor sit amet consectetur. </span>
                     </div>
-    
+
                     {/* form component */}
                     <form onSubmit={handleSubmit} className='p-8'>
                         {/* Basic Details */}
@@ -149,20 +159,18 @@ export default function UserOnboarding() {
                         </div>
     
                         {/* Button component */}
-                        <div className='flex flex-col md:flex-row md:justify-end md:pb-10 pr-4 md:pr-16 gap-6'>
+                        <div className='flex flex-col md:flex-row md:justify-end md:pb-10 pr-4 md:pr-16 gap-2'>
                             <div className=''>
-                                <button type='submit' className='bg-white text-blue-800 border border-blue-700 rounded-md py-2.5 px-10 md:mr-4'>Clear</button>
+                                <button type='submit' className='bg-white text-blue-800 border border-blue-700 rounded-md h-12  px-12 md:mr-4'>Clear</button>
                             </div>
                             <div className=''>
-                                <button className='bg-[#003FE4] text-white rounded-md py-2.5 px-10'>Save</button>
+                                <button className='bg-[#003FE4] border border-blue-700  text-white rounded-md h-12 px-12'>Save</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            {showConfirm && <ConfirmSaveUser onConfirm={handleConfirmSave} onCancel={handleCancelSave} />}
         </div>
     );
-    
-    
-    
 }
