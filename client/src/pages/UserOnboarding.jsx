@@ -106,7 +106,7 @@ export default function UserOnboarding() {
                     </div>
 
                     {/* form component */}
-                    <div className='ml-12 '>
+                    <div className='mx-12 '>
                         <form onSubmit={handleSubmit} className='p-8 px-2 '>
                             <div className='border'>
                                 {/* Basic Details */}
@@ -123,6 +123,7 @@ export default function UserOnboarding() {
                                             className="border border-gray-300 rounded-md p-2 focus:outline-blue-300 text-slate-700"
                                         />
                                         <input
+                                        required
                                             type="text"
                                             id="last_name"
                                             name="last_name"
@@ -132,6 +133,7 @@ export default function UserOnboarding() {
                                             className="border border-gray-300 rounded-md p-2 focus:outline-blue-300 text-slate-700"
                                         />
                                         <input
+                                        required
                                             type="date"
                                             id="dob"
                                             name="dob"
@@ -141,6 +143,7 @@ export default function UserOnboarding() {
                                             className="border border-gray-300 rounded-md p-2 focus:outline-blue-300 text-slate-700"
                                         />
                                         <select
+                                        required
                                             id="gender"
                                             name="gender"
                                             value={formData.basic_info.gender}
@@ -159,6 +162,7 @@ export default function UserOnboarding() {
                                     <h2 className='text-lg font-semibold text-gray-600 mb-4'>Contact Details</h2>
                                     <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                                         <input
+                                        required
                                             type="text"
                                             id="mobile_number"
                                             name="mobile_number"
@@ -174,6 +178,7 @@ export default function UserOnboarding() {
                                             className="border border-gray-300 rounded-md p-2 focus:outline-blue-300 text-slate-700"
                                         />
                                         <input
+                                        required
                                             type="email"
                                             id="email"
                                             name="email"

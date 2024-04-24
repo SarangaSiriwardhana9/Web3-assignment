@@ -33,7 +33,7 @@ export const loginUser = async (req, res, next) => {
 
     // Generate JWT token with user data
     const token = jwt.sign({ user: userWithoutPassword }, process.env.JWT_SECRET, {
-      expiresIn: '1h' // Token expires in 1 hour
+      expiresIn: '7d' 
     });
 
     // Set token in cookie
