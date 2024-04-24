@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import Header from '../components/Header';
 
@@ -41,8 +42,10 @@ export default function UserOnboarding() {
 
             const data = await res.json();
             console.log(data);
+            alert ("user added successfully")
         } catch (error) {
             console.error(error);
+            alert ("user aded failed")
         }
     };
 
