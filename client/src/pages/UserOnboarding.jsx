@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import ConfirmSaveUser from '../components/ConfirmSaveUser';
 
 export default function UserOnboarding() {
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         basic_info: {
             first_name: '',
             last_name: '',
@@ -14,7 +14,9 @@ export default function UserOnboarding() {
             email: '',
             mobile_number: ''
         }
-    });
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
     const [showConfirm, setShowConfirm] = useState(false);
 
     const handleChange = (e) => {
@@ -26,6 +28,10 @@ export default function UserOnboarding() {
                 [name]: value
             }
         }));
+    };
+
+    const handleClear = () => {
+        setFormData(initialFormData);
     };
 
     const handleSubmit = async (e) => {
@@ -48,6 +54,8 @@ export default function UserOnboarding() {
             const data = await res.json();
             console.log(data);
             alert("user added successfully")
+            /* clear form data after submit */
+            setFormData(initialFormData);
         } catch (error) {
             console.error(error);
             alert("user added failed")
@@ -58,6 +66,7 @@ export default function UserOnboarding() {
     const handleCancelSave = () => {
         setShowConfirm(false);
     };
+
 
     return (
         <div className='bg-slate-100'>
@@ -72,7 +81,8 @@ export default function UserOnboarding() {
                     </div>
 
                     {/* form component */}
-                    <form onSubmit={handleSubmit} className='p-8'>
+                    <div className='ml-16'>
+                    <form onSubmit={handleSubmit} className='p-8 px-1'>
                         {/* Basic Details */}
                         <div className='mb-6'>
                             <h2 className='text-lg font-semibold mb-4'>Basic Details</h2>
@@ -106,13 +116,13 @@ export default function UserOnboarding() {
                                 />
                              
                             </div>
-                            <div className='flex flex-col md:flex-row md:mr-4 mt-4 md:gap-x-10'>
+                            <div className='flex md:w-[380px] flex-col md:flex-row md:mr-4 mt-4 md:gap-x-10'>
                             <select
                                     id="gender"
                                     name="gender"
                                     value={formData.basic_info.gender}
                                     onChange={handleChange}
-                                    className="border border-gray-300 rounded-md py-2.5  focus:outline-blue-300 text-slate-700 w-full md:w-96 mt-4 md:mt-0"
+                                    className="border border-gray-300 rounded-md px-1 py-2.5  focus:outline-blue-300 text-slate-700 w-full md:w-96 mt-4 md:mt-0"
                                 >
                                     <option value="" disabled>Select Gender</option>
                                     <option value="MALE">Male</option>
@@ -161,13 +171,14 @@ export default function UserOnboarding() {
                         {/* Button component */}
                         <div className='flex flex-col md:flex-row md:justify-end md:pb-10 pr-4 md:pr-16 gap-2'>
                             <div className=''>
-                                <button type='submit' className='bg-white text-blue-800 border border-blue-700 rounded-md h-12  px-12 md:mr-4'>Clear</button>
+                                <button type='button' onClick={handleClear} className='bg-white text-blue-800 border border-blue-700 rounded-md h-12  px-12 md:mr-4'>Clear</button>
                             </div>
                             <div className=''>
-                                <button className='bg-[#003FE4] border border-blue-700  text-white rounded-md h-12 px-12'>Save</button>
+                                <button type='submit' className='bg-[#003FE4] text-white rounded-md h-12 px-12'>Save</button>
                             </div>
                         </div>
                     </form>
+                    </div>
                 </div>
             </div>
             {showConfirm && <ConfirmSaveUser onConfirm={handleConfirmSave} onCancel={handleCancelSave} />}
