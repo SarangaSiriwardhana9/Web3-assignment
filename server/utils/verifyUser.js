@@ -14,10 +14,3 @@ export const verifyToken = (req, res, next) => {
   });
 };
 
-export const verifyAdmin = (req, res, next) => {
-  if (req.user.type !== 'ADMIN') {
-      return next(errorHandler(401, 'Only admins can perform this action'));
-  }
-
-  next();
-};

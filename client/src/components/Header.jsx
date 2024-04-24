@@ -17,7 +17,7 @@ export default function Header() {
             </div>
             <div className=" flex items-center">
                 <div className="  sm:flex  ">
-                    <Link to="/user-onboarding" className="text-white sm:text-sm md:text-lg font-thin mr-4">User Onboarding</Link>
+                    <Link to="/" className="text-white sm:text-sm md:text-lg font-thin mr-4">User Onboarding</Link>
                     <Link to="/user-list" className="text-white sm:text-sm md:text-lg font-thin mr-4">Users List</Link>
                 </div>
                 <div className="px-10 hidden md:block"> 

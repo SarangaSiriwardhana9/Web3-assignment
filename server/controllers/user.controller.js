@@ -85,7 +85,7 @@ export const addUser = async (req, res, next) => {
 export const getAllUsers = async (req, res, next) => {
   try {
     // Find all users except the logged-in user
-    const users = await User.find({ _id: { $ne: req.user.id } });
+    const users = await User.find({ _id: { $ne: req.user.user.id } });
 
     // Send response with users data
     res.status(200).json({
@@ -97,6 +97,7 @@ export const getAllUsers = async (req, res, next) => {
     next(err);
   }
 };
+
 
 
 //logout user
